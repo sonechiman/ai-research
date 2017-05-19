@@ -1,14 +1,14 @@
 from .base import Base
-from sqlalchemy import Column,  String, Date
+from sqlalchemy import Column, Integer, String, Date, Text
 
 
 class News(Base):
     __tablename__ = 'news'
 
     id = Column(Integer, primary_key=True)
-    media = Column(String)
+    media = Column(String(32))
     date = Column(Date)
-    news_url = Column(String, nullable=False)
-    company_name = Column(String, nullable=False)
+    news_url = Column(String(256), nullable=False)
+    company_name = Column(String(32), nullable=False)
     original_description = Column(Text)
     japanese_description = Column(Text)
