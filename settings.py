@@ -2,7 +2,7 @@ import os
 
 MYSQL_CONNECTION = os.environ.get(
     'AIRESEARCH_DATA_MYSQL',
-    'mysql://root@localhost/airesearch'
+    'mysql+pymysql://root@localhost/airesearch?charset=utf8'
 )
 
 DRIVER_PATH = "/Users/user/util"
