@@ -1,7 +1,8 @@
 import json
 import urllib.parse
 import urllib.request
-import local_settings
+import settings
+from urls import urls
 
 
 def encode_name(urls, category="ml"):
@@ -12,7 +13,7 @@ def encode_name(urls, category="ml"):
 def get_company(name, filter=""):
     base_url = "https://api.crunchbase.com/v/3/odm-organizations?"
     query = {
-        "user_key": local_settings.CRUNCHBASE_API_KEY,
+        "user_key": settings.CRUNCHBASE_API_KEY,
         "name": name
     }
     q = urllib.parse.urlencode(query)
@@ -24,11 +25,7 @@ def get_company(name, filter=""):
 
 
 def get_companies_data():
-    try:
-        from local_urls import urls
-        names = encode_name(urls)
-    except ImportError:
-        print("No urls")
+    names = encode_name(urls)
     search_names = list(map(lambda x: x.replace('-', ' ').title(), names))
     for n, search_n in zip(names, search_names):
         company = get_company(search_n, n)

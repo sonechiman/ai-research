@@ -1,3 +1,4 @@
 *.egg-info/
 *.pyc
 local_settings.py
+local_urls.py

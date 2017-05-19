@@ -5,6 +5,11 @@ MYSQL_CONNECTION = os.environ.get(
     'mysql://root@localhost/airesearch'
 )
 
+DRIVER_PATH = "/Users/user/util"
+
+CRUNCHBASE_API_KEY = ""
+
+
 try:
     import local_settings
     for var in dir(local_settings):

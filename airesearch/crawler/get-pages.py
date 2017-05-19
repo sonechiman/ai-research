@@ -6,14 +6,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-import local_settings
+import settings
 
 # crunchbase block selenium
 
 
 def get_items(url):
     driver = webdriver.Chrome(os.path.join(
-                              local_settings.DRIVER_PATH, 'chromedriver'))
+                              settings.DRIVER_PATH, 'chromedriver'))
     driver.get(url)
     prior = 0
     while True:
