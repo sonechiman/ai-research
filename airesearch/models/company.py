@@ -14,6 +14,7 @@ class Company(Base):
     original_description = Column(Text)
     japanese_description = Column(Text)
     founded_date = Column(Date)
+    role = Column(String(32))
     categories = Column(String(256))
     news_page = Column(String(256))
     place = Column(String(32))

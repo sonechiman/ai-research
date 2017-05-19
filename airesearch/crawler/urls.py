@@ -11,6 +11,11 @@ urls = {
     "ai": []
 }
 
+names = {
+    "ml": [],
+    "ai": []
+}
+
 try:
     import local_urls
     for var in dir(local_urls):

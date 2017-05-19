@@ -6,9 +6,14 @@ function scroll() {
 
 setInterval(scroll, 2000);
 
-var items = document.querySelectorAll(".identity >a");
+var links = document.querySelectorAll(".identity >a");
 
-items.forEach(function(item) {
+links.forEach(function(item) {
     console.log(item.href);
 })
 
+var names = document.querySelectorAll(".identity .name");
+
+names.forEach(function(item) {
+    console.log(item.textContent);
+})
