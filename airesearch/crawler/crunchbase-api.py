@@ -55,7 +55,7 @@ def get_companies_data():
     for n in names["ml"]:
         if get_exiting_company(n):
             print("%s already" % n)
-            # continue
+            continue
         company_data = get_company(n, n)
         if company_data:
             save_company(company_data)
