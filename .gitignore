@@ -1,0 +1,3 @@
+*.egg-info/
+*.pyc
+local_settings.py
