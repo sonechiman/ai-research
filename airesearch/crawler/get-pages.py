@@ -18,9 +18,6 @@ def get_items(url):
     prior = 0
     while True:
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
-        current = len(WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "logo"))
-        ))
         print(current)
         break
         time.sleep(5)
@@ -28,6 +25,4 @@ def get_items(url):
             break
     driver.close()
 
-
-
-get_items(urls["ml"])
+get_items("https://angel.co/artificial-intelligence")
