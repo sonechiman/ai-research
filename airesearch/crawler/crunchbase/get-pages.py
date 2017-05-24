@@ -25,4 +25,4 @@ def get_items(url):
             break
     driver.close()
 
-get_items("https://angel.co/artificial-intelligence")
+get_items("https://techcrunch.com/2017/05/19/these-are-the-arguments-against-net-neutrality-and-why-theyre-wrong/")
