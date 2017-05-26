@@ -9,6 +9,8 @@ DRIVER_PATH = "/Users/user/util"
 
 CRUNCHBASE_API_KEY = ""
 
+WORDPRESS_URL = ""
+
 
 try:
     import local_settings
