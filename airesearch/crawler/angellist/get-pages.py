@@ -40,6 +40,7 @@ def save_item(item):
     company.angellist = item.find_element_by_css_selector('.text .name a') \
                             .get_attribute("href")
     company.abstract = item.find_element_by_css_selector('.blurb').text
+    company.followers = item.find_element_by_css_selector('.followers .value').text
     session.add(company)
     session.commit()
 
@@ -71,4 +72,4 @@ def get_items(url, use_filter):
     driver.close()
 
 if __name__ == "__main__":
-    get_items("https://angel.co/artificial-intelligence", True)
+    get_items("https://angel.co/artificial-intelligence", False)

@@ -7,6 +7,7 @@ class ALCompany(Base):
     __tablename__ = 'angellist_companies'
 
     id = Column(Integer, primary_key=True)
+    logo = Column(String(256))
     angellist = Column(String(256), index=True)
     name = Column(String(128), nullable=False, index=True, unique=True)
     url = Column(String(256), index=True)
@@ -15,12 +16,14 @@ class ALCompany(Base):
     original_description = Column(Text)
     japanese_description = Column(Text)
     founded_date = Column(Date)
-    employers = Column(String(128))
+    employees = Column(String(128))
     categories = Column(String(256))
     place = Column(String(256))
+    followers = Column(Integer)
 
     master = relationship('Company', backref="angellist", uselist=False)
     fundings = relationship('ALFunding', backref="company")
+    images = relationship('Image', backref="angellist")
 
     def __repr__(self):
         return "<Company(id={0}, name={1}>".format(self.id, self.name)

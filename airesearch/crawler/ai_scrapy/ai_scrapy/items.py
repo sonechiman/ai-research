@@ -8,7 +8,16 @@
 import scrapy
 
 
-class AiScrapyItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class AngelListItem(scrapy.Item):
+    name = scrapy.Field()
+    logo = scrapy.Field()
+    angellist = scrapy.Field()
+    url = scrapy.Field()
+    abstract = scrapy.Field()
+    original_description = scrapy.Field()
+    place = scrapy.Field()
+    categories = scrapy.Field()
+    employees = scrapy.Field()
+    images = scrapy.Field()
+    fundings = scrapy.Field()
+    followers = scrapy.Field()

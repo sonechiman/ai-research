@@ -21,6 +21,7 @@ class CBCompany(Base):
     place = Column(String(256))
     funding = Column(String(256))
 
+    images = relationship('Image', backref="crunchbase")
     master = relationship('Company', backref="crunchbase", uselist=False)
 
     def __repr__(self):
