@@ -21,10 +21,6 @@ def item_waiter(num):
     return wait
 
 
-def get_items(item):
-    pass
-
-
 def get_items(url):
     driver = webdriver.Chrome(os.path.join(
                               settings.DRIVER_PATH, 'chromedriver'))
