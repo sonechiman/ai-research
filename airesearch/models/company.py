@@ -8,6 +8,7 @@ class Company(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(128), nullable=False, index=True, unique=True)
+    url = Column(String(256), index=True)
     crunchbase_id = Column(Integer, ForeignKey('crunchbase_companies.id'))
     angellist_id = Column(Integer, ForeignKey('angellist_companies.id'))
 

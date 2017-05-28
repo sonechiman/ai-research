@@ -4,7 +4,7 @@ import urllib.request
 import csv
 
 import settings
-from airesearch.models import get_session, Company
+from airesearch.models import get_session, CBCompany
 from airesearch.translator import translator
 from urls import urls, names
 
@@ -60,28 +60,28 @@ def get_companies_data():
         if company_data:
             save_company(company_data)
         else:
-            print(n)
+            print("UNKNOW: %s" % n)
             unknowns.append(n)
         write_csv(unknowns, "unknown")
 
 
 def get_exiting_company(name):
-    company = session.query(Company) \
+    company = session.query(CBCompany) \
                      .filter_by(name=name).first()
     return company
 
 
-def write_csv(list, filename):
+def write_csv(item_list, filename):
     f = open('%s.csv' % filename, 'ab')
     csvWriter = csv.writer(f)
-    for item in list:
+    for item in item_list:
         csvWriter.writerow(item)
 
 
 def save_company(c):
     company = get_exiting_company(c["name"])
     if not company:
-        company = Company(name=c["name"])
+        company = CBCompany(name=c["name"])
     crunchbase_url = "https://www.crunchbase.com"
     company.abstract = c["short_description"]
     if not company.japanese_abstract:
