@@ -62,7 +62,7 @@ def get_companies_data():
         else:
             print("UNKNOW: %s" % n)
             unknowns.append(n)
-        write_csv(unknowns, "unknown")
+    write_csv(unknowns, "unknown")
 
 
 def get_exiting_company(name):
@@ -72,10 +72,10 @@ def get_exiting_company(name):
 
 
 def write_csv(item_list, filename):
-    f = open('%s.csv' % filename, 'ab')
+    f = open('%s.csv' % filename, 'w')
     csvWriter = csv.writer(f)
     for item in item_list:
-        csvWriter.writerow(item)
+        csvWriter.writerow([item])
 
 
 def save_company(c):

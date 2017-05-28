@@ -71,4 +71,4 @@ def get_items(url, use_filter):
     driver.close()
 
 if __name__ == "__main__":
-    get_items("https://angel.co/artificial-intelligence", False)
+    get_items("https://angel.co/artificial-intelligence", True)
