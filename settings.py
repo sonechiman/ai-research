@@ -11,6 +11,10 @@ CRUNCHBASE_API_KEY = ""
 
 WORDPRESS_URL = ""
 
+PROXY_LIST_PATH = "/Users/user/util"
+
+CRAWLERA_API_KEY = ""
+
 
 try:
     import local_settings
