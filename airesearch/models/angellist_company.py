@@ -20,6 +20,7 @@ class ALCompany(Base):
     categories = Column(String(256))
     place = Column(String(256))
     followers = Column(Integer)
+    video_url = Column(String(256))
 
     master = relationship('Company', backref="angellist", uselist=False)
     fundings = relationship('ALFunding', backref="company")

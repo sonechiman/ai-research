@@ -5,11 +5,21 @@ import settings
 from airesearch.models import get_session, ALCompany
 
 from ..items import AngelListItem
+import random
 
 
 class AngellistSpider(scrapy.Spider):
     name = "angellist"
     allowed_domains = ["angel.co"]
+    count = 0
+    session_count = 2
+    request_list = [
+                    "https://angel.co/artificial-intelligence",
+                    "https://angel.co/deep-learning-2",
+                    # "https://angel.co/natural-language-processing",
+                    "https://angel.co/machine-learning",
+                    # "https://angel.co/image-recognition"
+                    ]
 
     def __init__(self, *args, **kwargs):
         super(AngellistSpider, self).__init__(*args, **kwargs)
@@ -37,7 +47,16 @@ class AngellistSpider(scrapy.Spider):
         company["fundings"] = self.parse_funding(response)
         company["logo"] = response.css('.photo.subheader-avatar img')\
                                   .xpath('@src').extract_first()
-        return company
+        company["video_url"] = response.css(".big iframe").xpath('@src')\
+                                       .extract_first()
+        yield company
+        self.count += 1
+        print(self.count, self.session_count)
+        if self.count % self.session_count == 0:
+            self.session_count = random.randint(3, 15)
+            print("Random request happen!!")
+            yield scrapy.http.Request(random.choice(self.request_list), dont_filter=True,
+                                      callback=self.parse_nothing)
 
     def parse_funding(self, response):
         sel = response.css('.details.inner_section')
@@ -54,6 +73,9 @@ class AngellistSpider(scrapy.Spider):
             temp["raised"] = p
             result.append(temp)
         return result
+
+    def parse_nothing(self, response):
+        pass
 
     def parse_description(self, response):
         text_list = response.css('.product_desc .content::text').extract()

@@ -29,3 +29,4 @@ def translate_abstract():
 
 if __name__ == "__main__":
     translate_abstract()
+    translate_desc()

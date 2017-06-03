@@ -21,3 +21,4 @@ class AngelListItem(scrapy.Item):
     images = scrapy.Field()
     fundings = scrapy.Field()
     followers = scrapy.Field()
+    video_url = scrapy.Field()
