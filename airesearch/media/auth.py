@@ -1,8 +1,6 @@
 from urllib.parse import urljoin
 import requests
 from requests_oauthlib import OAuth1Session
-from requests_oauthlib import OAuth1
-import oauthlib
 
 import settings
 
