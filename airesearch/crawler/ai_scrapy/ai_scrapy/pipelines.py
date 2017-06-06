@@ -1,7 +1,7 @@
 import logging
 
 import settings
-from airesearch.models import get_session, ALCompany, Image, ALFunding
+from airesearch.models import get_session, ALCompany, Image, ALFunding, LogoImage
 from .items import AngelListItem
 
 Session = get_session(settings.MYSQL_CONNECTION)
@@ -40,6 +40,7 @@ class AngellistPipeline(MysqlPipeline):
 
         self._set_images(company, item)
         self._set_fundings(company, item)
+        self._set_logo(company, item)
         self._set_attributes(company, item)
         if company not in self.session:
             self.session.add(company)
@@ -51,6 +52,13 @@ class AngellistPipeline(MysqlPipeline):
             if not image:
                     image = Image(url=i)
             company.images.append(image)
+
+    def _set_logo(self, company, item):
+        logo = item["logo"]
+        image = self.session.query(LogoImage).filter_by(url=logo).first()
+        if not image:
+                image = LogoImage(url=logo)
+        company.logo_image = image
 
     def _set_fundings(self, company, item):
         fundings = item.pop('fundings', [])

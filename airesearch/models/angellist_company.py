@@ -1,4 +1,5 @@
 from .base import Base
+from .image import Image
 from sqlalchemy import Column, String, Date, Integer, Text, ForeignKey
 from sqlalchemy.orm import relationship
 
@@ -25,7 +26,7 @@ class ALCompany(Base):
     master = relationship('Company', backref="angellist", uselist=False)
     fundings = relationship('ALFunding', backref="company")
     images = relationship('Image', backref="angellist")
-    logo_image = relationship('Image', backref="angellist", uselist=False)
+    logo_image = relationship('LogoImage', backref="angellist", uselist=False)
 
     def __repr__(self):
         return "<Company(id={0}, name={1}>".format(self.id, self.name)
