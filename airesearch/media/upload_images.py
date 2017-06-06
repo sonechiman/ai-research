@@ -24,9 +24,10 @@ class WPImageUploadrer():
         return images
 
     def download_image(self, url, timeout=10):
+        print(url)
         response = requests.get(url, allow_redirects=False, timeout=timeout)
         if response.status_code != 200:
-            e = Exception("HTTP status: " + response.status_code)
+            e = Exception("HTTP status: " + str(response.status_code))
             raise e
         content_type = response.headers["content-type"]
         if 'image' not in content_type:
@@ -58,5 +59,5 @@ class WPImageUploadrer():
 
 if __name__ == "__main__":
     uploader = WPImageUploadrer()
-    uploader.transfer_image()
     uploader.transfer_image("logoimage")
+    uploader.transfer_image()

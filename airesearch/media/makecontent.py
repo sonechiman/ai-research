@@ -3,6 +3,7 @@ import requests
 from requests_oauthlib import OAuth1Session
 from jinja2 import Environment, FileSystemLoader
 from inflection import parameterize
+from sqlalchemy import and_
 
 import settings
 from airesearch.models import get_session, ALCompany
@@ -34,8 +35,6 @@ class WPSession():
     def post(self, post):
         url = urljoin(self.base_url, 'wp/v2/posts/')
         post_data = self.get_with_slug(post.key)
-        # data = {}
-        # data["featured_media"] = 12
 
         tags = post.model.categories.split(',')
         for t in tags:
@@ -46,7 +45,6 @@ class WPSession():
             r = self.oauth.post(url, json=post.dict)
         else:
             r = self.oauth.post(url, json=post.dict)
-            pass
         print(r.json())
 
     def convert_tag(self, tag):
@@ -78,6 +76,7 @@ class WPPost:
             'categories': [2],
             'excerpt': model.japanese_abstract,
             'comment_status': 'closed',
+            'featured_media': model.logo_image.wordpress_id,
             'slug': self.key,
             'tags': []
         }
@@ -91,23 +90,47 @@ class WPPost:
             'abstract': self.model.japanese_abstract,
             'description': self.model.japanese_description,
             'video_url': self.model.video_url,
-            'fundings': self.model.fundings
+            'fundings': self.model.fundings,
+            'place': self.model.place,
+            'url': self.model.url
         }
         if self.model.images:
             render_dict['main_image'] = self.model.images[0].url
         if len(self.model.images) > 1:
             render_dict['sub_images'] = [i.url for i in self.model.images[1:]]
+        render_dict['followers'] = self._get_follwers()
+        render_dict['employees'] = self._get_employees()
+
         html = tpl.render(render_dict)
-        print(html)
         self.dict['content'] = html
+
+    def _get_follwers(self):
+        if self.model.followers:
+            return max(self.model.followers // 10, 100)
+        else:
+            return None
+
+    def _get_employees(self):
+        if self.model.employees == '201-500':
+            return '500人未満'
+        elif self.model.employees == '51-200':
+            return '200人未満'
+        elif self.model.employees == '11-50':
+            return '50人未満'
+        elif self.model.employees == '1-10':
+            return '10人未満'
+        return None
+
 
 
 def main():
     session = WPSession()
+    # companies = dbsession.query(ALCompany)\
+    #                      .filter(and_(ALCompany.japanese_description != None,
+    #                              ALCompany.logo_image != None))
     companies = dbsession.query(ALCompany)\
-                         .filter(ALCompany.japanese_description != None)
-    for c in companies[:1]:
-        print(c.name)
+                         .filter(ALCompany.id==782)
+    for c in companies:
         post = WPPost(c)
         session.post(post)
 

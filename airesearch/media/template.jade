@@ -1,16 +1,55 @@
 if video_url
-    <iframe width="560" height="315" src="{{video_url}}" frameborder="0" allowfullscreen></iframe>
-if main_image
+    <iframe src="{{video_url}}" frameborder="0" allowfullscreen></iframe>
+elif main_image
     img.main(src='{{main_image}}')
 
 if abstract
-    .abstract
-        .content {{abstract}}
+    .abstract.content-box
+        .content-text {{abstract}}
 
 if description
-    .description
-        h3.label 概要
-        .content {{description}}
+    .description.content-box
+        h6.label 概要
+        if followers
+            .score-box.followers
+                span.label-text 有名度
+                span.score {{followers}}
+        if employees
+            .score-box.employees
+                span.label-text 会社規模
+                span.score {{employees}}
+        .content-text {{description}}
+        if url
+            .company-url.score-box
+                span.label-text 会社サイト
+                a(target="_blank" href="http://{{url}}") {{url}}
+        if place
+            .score-box
+                span.label-text 本拠地
+                span.score {{place}}
 
-//- if fundings
-//-     for 
+
+if fundings
+    .fundings.content-box
+        h6.label 資金調達
+        for f in fundings
+            .funding-box.score-box
+                .subtitle
+                    span.date {{f.date}}
+                    span.stage {{f.stage}}
+                .title {{f.raised}}
+
+if sub_images
+    .content-box.image
+        h6.label イメージ
+        if video_url
+            img.sub-image(src='{{main_image}}')
+        for i in sub_images
+            img.sub-image(src='{{i}}')
+
+.content-box.comment
+    h6.label 編集コメント
+    .content-text 【WRITE ME】
+
+
+
