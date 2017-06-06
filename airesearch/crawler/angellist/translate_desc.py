@@ -28,5 +28,5 @@ def translate_abstract():
         session.commit()
 
 if __name__ == "__main__":
-    translate_abstract()
     translate_desc()
+    translate_abstract()
