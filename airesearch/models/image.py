@@ -8,6 +8,8 @@ class Image(Base):
 
     id = Column(Integer, primary_key=True)
     url = Column(String(256), index=True)
+    wordpress_id = Column(Integer, index=True)
+    wordpress_url = Column(String(256))
 
     angellist_id = Column(Integer, ForeignKey('angellist_companies.id'))
     crunchbase_id = Column(Integer, ForeignKey('crunchbase_companies.id'))

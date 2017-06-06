@@ -25,6 +25,7 @@ class ALCompany(Base):
     master = relationship('Company', backref="angellist", uselist=False)
     fundings = relationship('ALFunding', backref="company")
     images = relationship('Image', backref="angellist")
+    logo_image = relationship('Image', backref="angellist", uselist=False)
 
     def __repr__(self):
         return "<Company(id={0}, name={1}>".format(self.id, self.name)
