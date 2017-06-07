@@ -125,12 +125,10 @@ class WPPost:
 
 def main():
     session = WPSession()
-    # companies = dbsession.query(ALCompany)\
-    #                      .filter(and_(ALCompany.japanese_description != None,
-    #                              ALCompany.logo_image != None))
     companies = dbsession.query(ALCompany)\
-                         .filter(ALCompany.id==782)
-    for c in companies:
+                         .filter(and_(ALCompany.japanese_description != None,
+                                 ALCompany.logo_image != None))
+    for c in companies[:2]:
         post = WPPost(c)
         session.post(post)
 

@@ -64,7 +64,7 @@ class AngellistSpider(scrapy.Spider):
                      response.css('.details .type::text').extract()))
         dates = response.css('.details.inner_section .date_display::text')\
                         .extract()
-        prices = response.css('.details .raised a::text').extract()
+        prices = response.css('.details .raised::text').extract()
         result = []
         for t, d, p in zip(types, dates, prices):
             temp = {}

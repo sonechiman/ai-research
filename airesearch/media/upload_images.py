@@ -24,7 +24,6 @@ class WPImageUploadrer():
         return images
 
     def download_image(self, url, timeout=10):
-        print(url)
         response = requests.get(url, allow_redirects=False, timeout=timeout)
         if response.status_code != 200:
             e = Exception("HTTP status: " + str(response.status_code))
