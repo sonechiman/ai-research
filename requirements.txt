@@ -53,6 +53,6 @@ SQLAlchemy==1.1.9
 sqlparse==0.2.3
 Tempita==0.5.2
 Twisted==17.1.0
-urllib3==1.21.1
+urllib3==1.26.5
 w3lib==1.17.0
 zope.interface==4.4.1
