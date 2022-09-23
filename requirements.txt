@@ -28,7 +28,7 @@ oauthlib==2.0.2
 packaging==16.8
 parsel==1.2.0
 pbr==3.0.1
-protobuf==3.3.0
+protobuf==3.18.3
 pyasn1==0.2.3
 pyasn1-modules==0.0.8
 pycparser==2.17
